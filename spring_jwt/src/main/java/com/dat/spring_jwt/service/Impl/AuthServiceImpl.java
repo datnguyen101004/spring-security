@@ -3,6 +3,7 @@ package com.dat.spring_jwt.service.Impl;
 import com.dat.spring_jwt.dto.LoginRequest;
 import com.dat.spring_jwt.dto.RegisterRequest;
 import com.dat.spring_jwt.dto.Reponse;
+import com.dat.spring_jwt.entity.Role;
 import com.dat.spring_jwt.entity.Token;
 import com.dat.spring_jwt.entity.User;
 import com.dat.spring_jwt.repository.TokenRepository;
@@ -33,7 +34,7 @@ public class AuthServiceImpl implements AuthService {
             return new Reponse(null, "Email is exist");
         }
         User user = new User();
-        user.setRole(registerRequest.getRole());
+        user.setRole(Role.USER);
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         var jwt = jwtService.generateToken(user);
